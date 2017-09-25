@@ -24,14 +24,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
  app.use(morgan('dev'));
 
  mongoose.connect(config.database);
+
  const serviceProvider=require('./controllers/ServiceProviderController');
+ const customerService=require('./controllers/CustomerController');
  
 app.get('/createService',function(req,res){
 
     res.render('./addService.ejs');
 });
 app.post('/createService',serviceProvider.addServiceProvider);
-
+app.get('/createCustomer',function(req,res){
+    
+        res.render('./addCustomer.ejs');
+    });
+    app.post('/createCustomer',customerService.addCustomer);
 
  // START THE SERVER
  // ===============================
