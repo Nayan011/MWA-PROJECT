@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "main": "server.js"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "*",
+    "body-parser": "*",
+    "cookie-parser": "^1.4.3",
+    "debug": "*",
+    "ejs": "*",
+    "express": "*",
+    "express-session": "*",
+    "jade": "*",
+    "jsonwebtoken": "^7.4.3",
+    "latest": "*",
+    "mongoose": "*",
+    "morgan": "*",
+    "multer": "^1.3.0",
+    "serve-favicon": "*"
+  }
+}

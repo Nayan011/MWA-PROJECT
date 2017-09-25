@@ -1,0 +1,37 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var bcrypt = require('bcrypt-nodejs');
+
+// user schema
+var CustomerSchema = new Schema({
+
+
+        name:String,
+        email: {
+        type: String,
+      
+        match: [/.+\@.+\..+/, "Please fill a valid e-mail address"]
+         },
+      mobileno:Number,
+      transactions:
+      [
+       {
+           fromLoc:String,
+           toLoc:String,
+           pickDate:Date,
+           dropDate:Date,
+           budget:Number,
+           status:String,
+           serviceprovider: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'ServiceProvider'
+         }
+       }
+
+      ]
+    
+
+ });
+
+
+module.exports = mongoose.model('Customer', CustomerSchema);
