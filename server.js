@@ -42,8 +42,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
   
     next()
   };
+   app.use(checkAuth);
+//Start customer Authentication 
+var cusAuth = function (req, res, next) {
+    console.log("Checking authentication");
   
-  app.use(checkAuth);
+    if (typeof req.cookies.CusToken === 'undefined' || req.cookies.CusToken === null) {
+      req.customer = null;
+    } else {
+      var token = req.cookies.CusToken;
+      var decodedToken = jwt.decode(token, { complete: true }) || {};
+      let data = decodedToken.payload;
+      req.customerEmail=data.email;
+      //console.log("email from Auth"+req.provider.email);
+      console.log("from d"+req.cookies.CusToken);
+    }
+  
+    next()
+  };
+  
+  app.use(cusAuth);
+//end customer Authentication 
+ 
 // importing Service Provider
   const serviceProvider=require('./controllers/ServiceProviderController');
   const serviceProviderAuth=require('./controllers/ServiceProviderAuth');
