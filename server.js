@@ -44,9 +44,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
   };
   
   app.use(checkAuth);
+// importing Service Provider
   const serviceProvider=require('./controllers/ServiceProviderController');
   const serviceProviderAuth=require('./controllers/ServiceProviderAuth');
-  const customerService=require('./controllers/CustomerController');
+
+ // initalization of Customer details
+const CustomerAuth=require('./controllers/CustomerAuth');
+const customerService=require('./controllers/CustomerController');
  
 app.get('/createServiceProvider',function(req,res){
 
@@ -73,6 +77,26 @@ app.get('/providerLogin',function(req,res){
 app.post('/providerLogin',serviceProviderAuth.ServiceProviderLogin);
 //app.get('/providerLogout',serviceProviderAuth.providerLogout);
 
+// importing Customer details 
+
+app.get('/createCustomer',function(req,res){
+    
+        res.render('./createCustomer.ejs');
+    });
+app.post('/createCustomer',customerService.addCustomer);
+    
+    app.get('/addTransaction',(req,res)=>{
+        res.render("./CustomerProfile.ejs");
+    });
+    app.post('/addTransaction',customerService.addTransaction);
+    app.get('/updateTransaction',customerService.updateTransaction);
+    app.get('/singleTransaction/:id',customerService.getSingleTransaction);
+    app.post('/updateTransaction/:id',customerService.updateTransaction);
+    app.get('/CustomerLogin',function(req,res){
+    
+        res.render('./CustomerLogin.ejs');
+    });
+    app.post('/CustomerLogin',CustomerAuth.CustomerLogin);
 
  // START THE SERVER
  // ===============================
